@@ -7,8 +7,8 @@ export async function getMojang(slug) {
 	const json = await response.json();
 	return {
 		response: response.status,
-		username: json.name,
-		uuid: normalizeUUID(json.id),
+		username: json?.name,
+		uuid: normalizeUUID(json?.id),
 	};
 }
 
@@ -49,7 +49,7 @@ export async function getHypixelResource(endpoint) {
 }
 
 function normalizeUUID(uuid) {
-    if (!uuid.includes("-")) {
+    if (uuid && !uuid.includes("-")) {
         return [uuid.slice(0, 8), uuid.slice(8, 12), uuid.slice(12, 16), uuid.slice(16, 20), uuid.slice(20)].join('-')
     }
     return uuid;
